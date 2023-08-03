@@ -3,16 +3,10 @@
  */
 public interface Transition {
 
-    /**
-     * Is the transition possible with the given character?
-     * @param c char.
-     * @return true or false.
-     */
+    // Returns a bolean value according to if the character inputted matches the
+    // rule for this transition.
     boolean isPossible(final CharSequence c);
 
-    /**
-     * The state to which this transition leads.
-     * @return State.
-     */
+    // Returns the state this transition is leading to.
     State state();
 }

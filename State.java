@@ -3,25 +3,13 @@
  */
 public interface State {
 
-    /**
-     * Add a Transition to this state.
-     * @param tr Given transition.
-     * @return Modified State.
-     */
+    // Create a transition for the state.
     State with(final Transition tr);
 
-    /**
-     * Follow one of the transitions, to get 
-     * to the next state.
-     * @param c Character.
-     * @return State.
-     * @throws IllegalStateException if the char is not accepted.
-     */
+    // Attempts to transition to the next state by using the given character as the
+    // rule.
     State transit(final CharSequence c);
-    
-    /**
-     * Can the automaton stop on this state?
-     * @return true or false
-     */
+
+    // A getter method that returns if the state is a final state or not.
     boolean isFinal();
 }
