@@ -73,7 +73,7 @@ public class Test {
         while (data.hasNextInt()) {
             Integer index = data.nextInt();
             states[index] = new RtState(true);
-            if (index == states.length - 1) {
+            if (!data.hasNextInt()) {
                 System.out.print("State " + index + "}\n");
             } else {
                 System.out.print("State " + index + ", ");
@@ -111,9 +111,9 @@ public class Test {
 
         // Tests the test strings given and outputs them along with wether they're
         // accepted by the FA.
-        FiniteStateMachine machine = new RtFiniteStateMachine(states[0]);
         System.out.println("\nResult of Test Strings: ");
         while (data.hasNext()) {
+            FiniteStateMachine machine = new RtFiniteStateMachine(states[0]);
             try {
                 String word = data.next();
                 System.out.print(word + "     ");
