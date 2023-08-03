@@ -83,12 +83,13 @@ public class Test {
         // Takes in the alphabet for the language and also outputs that info.
         alpha = new ArrayList<>();
         String a;
+        data.next();
         while (data.hasNext() && (a = data.next()).length() == 1) {
             alpha.add(a);
         }
         System.out.print("3) Alphabet set: {");
         for (int index = 0; index < alpha.size(); index++) {
-            if (index == states.length - 1) {
+            if (index == alpha.size() - 1) {
                 System.out.print(alpha.get(index) + "}\n");
             } else {
                 System.out.print(alpha.get(index) + ", ");
@@ -126,7 +127,7 @@ public class Test {
                     System.out.println("Reject");
                 }
             } catch (IllegalArgumentException iae) {
-                System.out.print("Reject");
+                System.out.println("Reject");
             }
         }
         System.out.println("");
