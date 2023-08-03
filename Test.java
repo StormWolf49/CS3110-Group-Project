@@ -18,7 +18,7 @@ public class Test {
     // provided which was used in intial testing of program.
     public static void main(String[] args) throws FileNotFoundException {
         // Example FA
-        Scanner data = new Scanner(new File("M1.txt"));
+        Scanner data = new Scanner(new File("Test.txt"));
         System.out.println("\nTest FA:");
         setup(data);
         data.close();
@@ -64,7 +64,7 @@ public class Test {
             } else if (index == states.length - 1) {
                 System.out.print("State " + index + "}, Initial State is State 0 (Default)\n");
             } else {
-                System.out.print("State " + index);
+                System.out.print("State " + index + ", ");
             }
         }
 
