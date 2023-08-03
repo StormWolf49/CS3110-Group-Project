@@ -15,39 +15,51 @@ public class Test {
     }
 
     public static void setup(Scanner data) {
+        System.out.println("Inputted Finite State Automation Info:\n1) Set of States: {");
         Integer num = data.nextInt();
         State[] states = new State[num];
-        for(int index = 0; index < states.length; index++) {
+        for (int index = 0; index < states.length; index++) {
             states[index] = new RtState();
+            if (index == 0) {
+                System.out.print("State " + index + ", ");
+            }
+            else if (index == states.length - 1) {
+                System.out.print("State " + index + "}, Initial State is State 0 (Default)\n");
+            }
+            else {
+                System.out.print("State " + index);
+            }
         }
-        while(data.hasNextInt()) {
+        while (data.hasNextInt()) {
             states[data.nextInt()] = new RtState(true);
         }
-        for(int index = 0; index < states.length; index++) {
+        /* for (int index = 0; index < states.length; index++) {
             System.out.println(states[index]);
-        }
-        alpha = new ArrayList<String>();
+        } */
+        alpha = new ArrayList<>();
         String a;
-        while(data.hasNext() && (a = data.next()).length() == 1) {
+        while (data.hasNext() && (a = data.next()).length() == 1) {
             alpha.add(a);
         }
-        for(int index = 0; index < alpha.size(); index++) {
+        for (int index = 0; index < alpha.size(); index++) {
             System.out.println(alpha.get(index));
         }
-        alp = new ArrayList<Integer>();
-        while(data.hasNext()) {
-            String str = data.next();
-            String z = String.valueOf(str.charAt(0));
-            String f = String.valueOf(str.charAt(1));
-            if(isNumeric(z)) {
-                alp.add(Integer.valueOf(z));
-            }
-            else if(isNumeric(f)) {
-                alp.add(Integer.valueOf(f));
+        String str;
+        while (data.hasNext() && !((str = data.next()).equals("-----"))) {
+            if (str.length() > 1) {
+                Integer f = Integer.valueOf(String.valueOf(str.charAt(1)));
+                String t = String.valueOf(str.charAt(3));
+                Integer e = Integer.valueOf(String.valueOf(str.charAt(5)));
+                states[f] = states[f].with(new RtTransition(t, states[e]));
             }
         }
-        for(int index = 0; index < alp.size(); index++) {
-            System.out.println(alp.get(index));
+        FiniteStateMachine machine = new RtFiniteStateMachine(states[0]);
+        while (data.hasNext()) {
+            String word = data.next();
+            for (int i = 0; i < word.length(); i++) {
+                machine = machine.switchState(String.valueOf(word.charAt(i)));
+            }
+            System.out.println(machine.canStop());
         }
     }
 
@@ -56,7 +68,7 @@ public class Test {
             return false;
         }
         try {
-            double d = Double.parseDouble(strNum);
+            Double.parseDouble(strNum);
         } catch (NumberFormatException nfe) {
             return false;
         }
